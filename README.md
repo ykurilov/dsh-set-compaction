@@ -12,11 +12,17 @@
 
    Windows (PowerShell):
 
-    curl.exe -sSL -o set-compaction.cjs https://raw.githubusercontent.com/ykurilov/dsh-set-compaction/main/set-compaction.cjs
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/ykurilov/dsh-set-compaction/main/set-compaction.cjs -OutFile set-compaction.cjs
 
-   Если raw.githubusercontent.com недоступен, зеркало:
+   Если `curl.exe` в Windows падает с ошибкой schannel — это его TLS-стек, используйте вариант с `Invoke-WebRequest` выше.
+
+   Если raw.githubusercontent.com недоступен (таймаут GitHub), зеркало:
 
     curl -sSL -o set-compaction.cjs https://cdn.jsdelivr.net/gh/ykurilov/dsh-set-compaction@main/set-compaction.cjs
+
+   Windows-зеркало:
+
+    Invoke-WebRequest -Uri https://cdn.jsdelivr.net/gh/ykurilov/dsh-set-compaction@main/set-compaction.cjs -OutFile set-compaction.cjs
 
 2. Запустить:
 
