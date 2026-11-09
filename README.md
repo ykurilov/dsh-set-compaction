@@ -1,6 +1,6 @@
 # dsh-set-compaction
 
-Ставит порог автокомпрессии DeepSeek Harness на заданное число токенов — например, 250 000 вместо дефолтных 727 040.
+Ставит порог автокомпрессии DeepSeek Harness на заданное число токенов — например, 250 000 вместо дефолтных 727 040. Правит **все** пресеты агента (Стандартный, PTC, Минимальный, Режим создателя), чтобы порог держался в любом режиме.
 
 ## Установка
 
@@ -39,11 +39,18 @@
 ## Что делает
 
 - находит DSH home (`DSH_HOME` или `~/.dsh`), профиль (`desktop`) и `cordis.patch.yml`;
-- берёт из последней сессии `contextWindow` (W) и id активного пресета;
-- достаёт `config` пресета из `app.asar` (`dsh/node_modules/@deepseek-ai/dsh-web-app/presets/<пресет>.patch.yml`);
-- вписывает в `compaction-basic`: `thresholdRatio = N / W` и `retainTokens: 60000`;
+- берёт `contextWindow` (W) из самой свежей сессии и считает `thresholdRatio = N / W`;
+- перебирает все пресеты в `app.asar` (`dsh/node_modules/@deepseek-ai/dsh-web-app/presets/*.patch.yml`);
+- для каждого вписывает в `compaction-basic` настройки `thresholdRatio` и `retainTokens: 60000`;
 - заменяет существующую запись `preset-<id>` или дописывает её в конец файла;
 - делает бэкап `cordis.patch.yml` рядом с оригиналом.
+
+## Параметры
+
+    node set-compaction.cjs <N>            все пресеты
+    node set-compaction.cjs <N> --preset ptc   только один пресет
+    node set-compaction.cjs <N> --dry      показать, что будет записано, ничего не менять
+    node set-compaction.cjs <N> --profile desktop   явно указать профиль
 
 ## Проверка
 
