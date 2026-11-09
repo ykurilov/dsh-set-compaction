@@ -31,7 +31,8 @@
    Если `node` не установлен, возьмите тот, что уже есть у DSH:
 
     macOS:    ~/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/node/bin/node
-    Windows:  %USERPROFILE%\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\node\node.exe
+    Windows:  %USERPROFILE%\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\node\bin\node.exe
+              (если его там нет — тот же путь без \bin\)
 
 3. Полностью выйти из DSH и открыть заново: macOS — Cmd+Q, Windows — трей → «Выйти». Закрытие окна не считается.
 
